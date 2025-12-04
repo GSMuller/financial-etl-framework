@@ -17,7 +17,7 @@ e análise de incentivos.
 - Automatizar ingestões diárias do BigQuery e dos cadastros manuais.  
 - Aplicar regras de negócio (ex.: bonificação BYD, status de faturamento).  
 - Criar camadas estruturadas (RAW → STG → MART) para simplificar consumo da Controladoria.  
-- Suportar relatórios, fechamentos mensais e indicadores internos.
+- Suportar relatórios, fechamentos mensais e indicadores internos!
 
 ---
 
