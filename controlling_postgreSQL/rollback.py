@@ -5,3 +5,5 @@ from conn import get_connection # type: ignore
 
 conn = get_connection()
 conn.rollback()
+
+print("Rollback realizado com sucesso.")
