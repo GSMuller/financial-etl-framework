@@ -21,3 +21,5 @@ WHERE
     OR rebate_dpto IN ('NaN', '0.0')
     OR ipva_dpto IN ('NaN', '0.0')
     OR trade_mkt_dpto IN ('NaN', '0.0');
+
+
