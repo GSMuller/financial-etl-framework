@@ -1,0 +1,53 @@
+## Bibliotecas e conexão com o banco de dados
+import pandas as pd
+import sys
+sys.path.append(r'C:\Users\giovanni.5683\GITHUB\controlling_postgreSQL')  # Adiciona o diretório onde está conn.py
+from conn import get_connection
+engine = get_connection()
+cursor = engine.cursor()
+import plotly.express as px
+from datetime import datetime, timedelta
+
+# Definir início da semana (segunda-feira)
+hoje = datetime.now()
+inicio_semana = hoje - timedelta(days=hoje.weekday())
+
+# Carregar dados da semana
+query = f"""
+    SELECT * FROM byd.bonus_view
+    WHERE dta_processamento >= '{inicio_semana.date()}' AND dta_processamento <= '{hoje.date()}'
+"""
+df_semana = pd.read_sql(query, engine)
+
+# Converter colunas numéricas para tipo correto
+numeric_cols = ['valor_bonus', 'rebate', 'reembolso_ipva', 'trade']
+for col in numeric_cols:
+    if col in df_semana.columns:
+        df_semana[col] = pd.to_numeric(df_semana[col], errors='coerce')
+
+# 1. Gráfico: Quantos idnfsexterno estão com PENDENTE VERIFICACAO por tipo de bônus
+pendentes = df_semana[df_semana['bonus_utilizado'] == 'PENDENTE VERIFICACAO']
+graf1 = pendentes.groupby('bonus_utilizado').agg({'idnfsexterno':'nunique'}).reset_index()
+fig1 = px.bar(graf1, x='bonus_utilizado', y='idnfsexterno', title='Pendentes de Verificação na Semana', labels={'idnfsexterno':'Qtd. idnfsexterno'})
+fig1.show()
+
+# 2. Gráfico: Top 10 maiores bônus da semana por tipo de bônus
+if not df_semana.empty:
+    top_bonus = df_semana.nlargest(10, 'valor_bonus')
+    fig2 = px.bar(top_bonus, x='idnfsexterno', y='valor_bonus', color='bonus_utilizado',
+                  title='Top 10 Maiores Bônus da Semana',
+                  labels={'idnfsexterno':'ID NF Externo', 'valor_bonus':'Valor Bônus', 'bonus_utilizado':'Tipo de Bônus'})
+    fig2.show()
+else:
+    print('Nenhum dado para a semana atual.')
+
+# 3. Resumo: soma dos valores semanais
+resumo = df_semana[['valor_bonus','rebate','reembolso_ipva','trade']].sum().to_frame('Total Semana')
+print(resumo)
+
+# 4. Gráfico: Distribuição dos tipos de bônus na semana
+graf3 = df_semana['bonus_utilizado'].value_counts().reset_index()
+graf3.columns = ['bonus_utilizado','quantidade']
+fig3 = px.bar(graf3, x='bonus_utilizado', y='quantidade', title='Distribuição dos Tipos de Bônus na Semana')
+fig3.show()
+
