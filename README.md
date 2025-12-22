@@ -41,3 +41,68 @@ MART_CONTROLADORIA
         │
         ▼
 Dashboards, relatórios e controles financeiros
+
+---
+
+## Estrutura do Repositório
+
+```
+controlling_postgreSQL/
+├── conn.py                  # Conexão com banco PostgreSQL
+├── daily_report/            # Relatórios diários e notebooks
+├── rollback.py              # Scripts de rollback
+├── Datasets/                # Dados de entrada (CSV)
+├── notebooks/               # Jupyter Notebooks de análise
+├── schemas/                 # Schemas SQL (criação, alteração, views, triggers)
+│   └── byd/                 # Schemas específicos BYD
+│       └── tables/
+│           ├── create/      # Criação de tabelas e views
+│           ├── insert/      # Scripts de inserção
+│           ├── alter/       # Alterações de schema
+│           ├── remove/      # Remoção de colunas
+│           └── view&conults/# Views e consultas
+│       └── triggers/        # Triggers e funções
+└── scripts/                 # Scripts utilitários
+```
+
+---
+
+## Como Usar
+
+1. Clone o repositório:
+        ```bash
+        git clone https://github.com/SeuUsuario/controlling_postgreSQL.git
+        ```
+2. Instale os requisitos (Python 3.9+):
+        ```bash
+        pip install -r requirements.txt
+        ```
+3. Configure o acesso ao banco PostgreSQL em `conn.py`.
+4. Execute os scripts conforme a necessidade:
+        - Ingestão de dados: scripts em `Datasets/` e `schemas/byd/tables/insert/`
+        - Criação de tabelas/views: scripts em `schemas/byd/tables/create/`
+        - Relatórios: notebooks em `daily_report/` ou `notebooks/`
+
+---
+
+## Requisitos
+
+- Python 3.9+
+- PostgreSQL 13+
+- Bibliotecas: pandas, psycopg2, sqlalchemy, jupyter, etc.
+
+---
+
+## Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch: `git checkout -b feature/nome-da-feature`
+3. Commit suas alterações: `git commit -m 'feat: nova feature'`
+4. Push para o fork: `git push origin feature/nome-da-feature`
+5. Abra um Pull Request
+
+---
+
+## Licença
+
+Este projeto é privado e de uso interno da Controladoria Servopa.
