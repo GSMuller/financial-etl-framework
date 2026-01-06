@@ -1,3 +1,22 @@
+/**
+ * TABELA: byd.controle
+ * 
+ * Objetivo:
+ *   Armazena dados consolidados de controle de bônus/incentivos por revenda.
+ *   Utilizada para acompanhamento financeiro e operacional da controladoria.
+ * 
+ * Principais campos:
+ *   - revenda: Identificação da concessionária
+ *   - competencia: Mês/ano de referência
+ *   - status: Status atual do bônus (pendente, pago, etc)
+ *   - tipo_de_bonus: Categoria do incentivo
+ *   - datas: timestamps de pagamento, baixa, previsões
+ *   - valores monetários: campos prefixados com $ (recebido, custos, diferenças)
+ * 
+ * Uso:
+ *   Base para relatórios gerenciais e fechamento mensal
+ */
+
 CREATE TABLE IF NOT EXISTS byd.controle
 (
 revenda text,
