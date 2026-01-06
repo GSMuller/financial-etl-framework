@@ -1,32 +1,9 @@
-/**
- * TRIGGER FUNCTION: bonus_calculation()
- * 
- * Objetivo:
- *   Calcula automaticamente o campo 'bonus_utilizado' com base em regras de negócio
- *   específicas para vendas de veículos BYD. Este campo indica quais bônus/incentivos
- *   foram aplicados na venda.
- * 
- * Regras de Prioridade (aplicadas em ordem):
- *   1. Veículo de Devolução (V07) - retorna imediatamente
- *   2. Refaturado - venda que já foi faturada anteriormente
- *   3. Venda Direta (VD) - venda sem bônus especial
- *   4. Venda Cancelada - nota fiscal cancelada
- *   5. Pendente Verificação - quando nenhum bônus está preenchido
- *   6. Cálculo de Lista de Bônus - concatena todos os bônus ativos
- * 
- * Versão: v01
- * Última atualização: 2025
- * 
- * Uso: Este trigger é executado BEFORE INSERT OR UPDATE na tabela de vendas
- */
-
 DECLARE
     bonus_list TEXT[];
     trade_marketing_ativo BOOLEAN; 
 BEGIN
     
     -- 1. REGRA: VEÍCULO DE DEVOLUÇÃO (V07)
-    -- Veículos devolvidos não elegíveis para bônus
     IF NEW.tipo_transacao = 'V07' THEN
         NEW.bonus_utilizado := 'Veículo de Devolução';
         RETURN NEW;
