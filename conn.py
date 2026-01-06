@@ -1,0 +1,64 @@
+"""
+Módulo de conexão com banco de dados PostgreSQL.
+Utiliza variáveis de ambiente para segurança das credenciais.
+"""
+
+import os
+import psycopg2
+from dotenv import load_dotenv
+
+# Carrega variáveis de ambiente do arquivo .env
+load_dotenv()
+
+# Configurações de conexão usando variáveis de ambiente
+config = {
+    'host': os.getenv('DB_HOST', 'localhost'),
+    'database': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'port': int(os.getenv('DB_PORT', 5432))
+}
+
+def get_connection():
+    """
+    Cria e retorna uma nova conexão com o banco de dados PostgreSQL.
+    
+    As credenciais são carregadas do arquivo .env na raiz do projeto.
+    
+    Returns:
+        psycopg2.connection: Objeto de conexão com o banco de dados.
+    
+    Raises:
+        psycopg2.Error: Se houver erro na conexão.
+        ValueError: Se credenciais obrigatórias não estiverem definidas.
+    
+    Exemplo de uso:
+        from conn import get_connection
+        
+        try:
+            conn = get_connection()
+            cursor = conn.cursor()
+            # ... suas operações
+        except Exception as e:
+            print(f"Erro na conexão: {e}")
+        finally:
+            if conn:
+                conn.close()
+    """
+    # Validação de credenciais obrigatórias
+    required_vars = ['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASSWORD']
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    
+    if missing_vars:
+        raise ValueError(
+            f"❌ Variáveis de ambiente obrigatórias não definidas: {', '.join(missing_vars)}\n"
+            f"Certifique-se de ter um arquivo .env na raiz do projeto com todas as credenciais."
+        )
+    
+    try:
+        return psycopg2.connect(**config)
+    except psycopg2.Error as e:
+        raise psycopg2.Error(
+            f"❌ Erro ao conectar ao banco de dados: {e}\n"
+            f"Verifique suas credenciais no arquivo .env"
+        )
