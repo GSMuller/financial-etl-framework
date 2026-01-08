@@ -1,0 +1,66 @@
+/**
+ * TABELA: byd.controle
+ * 
+ * Objetivo:
+ *   Armazena dados consolidados de controle de bônus/incentivos por revenda.
+ *   Utilizada para acompanhamento financeiro e operacional da controladoria.
+ * 
+ * Principais campos:
+ *   - revenda: Identificação da concessionária
+ *   - competencia: Mês/ano de referência
+ *   - status: Status atual do bônus (pendente, pago, etc)
+ *   - tipo_de_bonus: Categoria do incentivo
+ *   - datas: timestamps de pagamento, baixa, previsões
+ *   - valores monetários: campos prefixados com $ (recebido, custos, diferenças)
+ * 
+ * Uso:
+ *   Base para relatórios gerenciais e fechamento mensal
+ */
+
+CREATE TABLE IF NOT EXISTS byd.controle
+(
+revenda text,
+competencia text,
+status text,
+tipo_de_bonus text,
+categoria_bonus text,
+parcial_final text,
+dta_pgto timestamp,
+dta_baixa timestamp,
+dta_inf_fab timestamp,
+dta_prevista timestamp,
+qtd_vendas text,
+nd text,
+"$razao" text,
+indeferido text,
+reavaliação text,
+"2024" text,
+proj_atacado text,
+proj_pdi text,
+proj_performance text,
+"$recebido" text,
+"$custo_agregado" text,
+"$recebido_efetivo" text,
+"$df_positiva" text,
+"$df_negativa" text,
+"$comissao_vd" text,
+"$info_fab" text,
+"$proj_op" text,
+"$proj_rebate_op" text,
+"$proj_ipva_op" text,
+"$proj_trade_op" text,
+"$proj_equal_op" text,
+"$proj_varejo_op" text,
+"$proj_tradein_op" text,
+"$proj_total_op" text,
+"$proj_dpto" text,
+"$proj_rebate_dpto" text,
+"$proj_ipva_dpto" text,
+"$proj_trade_dpto" text,
+"$proj_equal_dpto" text,
+"$proj_varejo_dpto" text,
+"$proj_tradein_dpto" text,
+"observação" text,
+"$a_receber" text,
+"$dif_real" text
+)

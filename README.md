@@ -1,6 +1,14 @@
 # Servopa Data Warehouse — Controladoria  
+
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-blue.svg)](https://www.postgresql.org/)
+[![Python](https://img.shields.io/badge/Python-3.9+-green.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-Private-red.svg)]()
+[![Code Style](https://img.shields.io/badge/code%20style-documented-brightgreen.svg)]()
+
 Migração, padronização e consolidação de dados operacionais e administrativos  
-PostgreSQL • BigQuery • ETL • Python • RDBMS  
+**PostgreSQL • BigQuery • ETL • Python • RDBMS**
+
+---
 
 Este repositório contém a arquitetura, scripts e pipelines utilizados na criação do
 Data Warehouse da Controladoria Servopa. O objetivo é integrar as fontes de dados

@@ -2200,10 +2200,44 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 90,
    "id": "6c35858f",
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "🗑️  Removendo registros inválidos (não existem no CSV)...\n",
+      "======================================================================\n",
+      "\n",
+      "📊 Removendo 162 registros...\n",
+      "   (Primeiros 10: ['4-2025-006', '3-2025-040', '3-2025-042', '3-2025-024', '3-2025-033', '3-2025-026', '2-2025-070', '4-2025-004', '2-2025-067', '4-2025-013'])\n",
+      "\n",
+      "  → 50 registros removidos...\n",
+      "  → 100 registros removidos...\n",
+      "  → 150 registros removidos...\n",
+      "\n",
+      "   ✅ Total removido: 162\n",
+      "\n",
+      "======================================================================\n",
+      "✅ AJUSTE FINAL CONCLUÍDO:\n",
+      "   • CSV tinha: 6997 linhas (chassis individuais)\n",
+      "   • CSV agrupado: 206 NDs únicas\n",
+      "   • Banco agora tem: 206 registros\n",
+      "   • Status: 🎉 PERFEITO! Todos os registros corretos!\n",
+      "======================================================================\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\giovanni.5683\\AppData\\Local\\Temp\\ipykernel_22696\\2543075629.py:33: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.\n",
+      "  total_final = pd.read_sql_query('SELECT COUNT(*) FROM gerador_nd.notadebito', engine).iloc[0, 0]\n"
+     ]
+    }
+   ],
    "source": [
     "## Remover NDs que não existem no CSV (lixo do processo anterior)\n",
     "print(\"🗑️  Removendo registros inválidos (não existem no CSV)...\")\n",
@@ -2246,6 +2280,67 @@
     "print(f\"   • Banco agora tem: {total_final} registros\")\n",
     "print(f\"   • Status: {'🎉 PERFEITO! Todos os registros corretos!' if total_final == 206 else f'⚠️ Diferença de {abs(total_final - 206)} registros'}\")\n",
     "print(f\"{'='*70}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "id": "5b65a12b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "📋 ND 35 de Londrina:\n",
+      "======================================================================\n",
+      "   Número ND: 7-2025-035\n",
+      "   Valor: R$ 50.400,00\n",
+      "   Data Emissão: 2025-01-06\n",
+      "   Descrição: 101-42 Bônus PDISuper Atacado Híbridos\n",
+      "   Loja: BYD Londrina\n",
+      "======================================================================\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\giovanni.5683\\AppData\\Local\\Temp\\ipykernel_22696\\755820320.py:16: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.\n",
+      "  df_nd35 = pd.read_sql_query(query_nd35, engine)\n"
+     ]
+    }
+   ],
+   "source": [
+    "## Consultar ND 35 de Londrina\n",
+    "query_nd35 = \"\"\"\n",
+    "SELECT \n",
+    "    nd.numero_nd,\n",
+    "    nd.valor,\n",
+    "    nd.data_emissao,\n",
+    "    nd.descricao,\n",
+    "    f.nome_loja,\n",
+    "    f.codigo_filial\n",
+    "FROM gerador_nd.notadebito nd\n",
+    "JOIN gerador_nd.filial f ON nd.filial_id = f.id\n",
+    "WHERE f.nome_loja = 'BYD Londrina'\n",
+    "  AND nd.numero_nd LIKE '%-035'\n",
+    "\"\"\"\n",
+    "\n",
+    "df_nd35 = pd.read_sql_query(query_nd35, engine)\n",
+    "\n",
+    "if len(df_nd35) > 0:\n",
+    "    print(f\"📋 ND 35 de Londrina:\")\n",
+    "    print(\"=\"*70)\n",
+    "    for idx, row in df_nd35.iterrows():\n",
+    "        print(f\"   Número ND: {row['numero_nd']}\")\n",
+    "        print(f\"   Valor: R$ {row['valor']:,.2f}\".replace(',', 'X').replace('.', ',').replace('X', '.'))\n",
+    "        print(f\"   Data Emissão: {row['data_emissao']}\")\n",
+    "        print(f\"   Descrição: {row['descricao']}\")\n",
+    "        print(f\"   Loja: {row['nome_loja']}\")\n",
+    "    print(\"=\"*70)\n",
+    "else:\n",
+    "    print(\"⚠️  ND 35 de Londrina não encontrada no banco.\")"
    ]
   },
   {
