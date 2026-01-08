@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 # Carrega variáveis de ambiente do arquivo .env
-# Define o caminho do .env relativo a este arquivo
-env_path = Path(__file__).parent / '.env'
+# Define o caminho do .env na raiz do projeto (2 níveis acima)
+env_path = Path(__file__).parent.parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Configurações de conexão usando variáveis de ambiente

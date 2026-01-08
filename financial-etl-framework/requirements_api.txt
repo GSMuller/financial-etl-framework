@@ -1,0 +1,26 @@
+# Dependências Adicionais - API REST e Automação
+
+# API REST
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+python-multipart==0.0.6
+
+# Exportação de dados
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# Agendamento e tarefas assíncronas
+schedule==1.2.0
+
+# Email
+python-dotenv>=1.0.0  # Já existe em requirements.txt mas garantindo versão
+
+# HTTP client (para testes de API)
+httpx==0.26.0
+
+# Validação e serialização
+email-validator==2.1.0
+
+# Timezone handling
+pytz==2024.1
