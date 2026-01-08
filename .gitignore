@@ -69,6 +69,12 @@ daily_report/*.csv
 *.log
 logs/
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
 # OS
 Thumbs.db
 .DS_Store

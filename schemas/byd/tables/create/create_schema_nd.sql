@@ -1,6 +1,0 @@
-CREATE SCHEMA IF NOT EXISTS gerador_nd;
-
-SELECT current_database();
-
-GRANT USAGE ON SCHEMA gerador_nd TO PUBLIC;
-GRANT CREATE ON SCHEMA gerador_nd TO CURRENT_USER;

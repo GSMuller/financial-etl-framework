@@ -5,6 +5,7 @@ Utiliza variáveis de ambiente para segurança das credenciais.
 
 import os
 import psycopg2
+from contextlib import contextmanager
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -65,3 +66,23 @@ def get_connection():
             f"❌ Erro ao conectar ao banco de dados: {e}\n"
             f"Verifique suas credenciais no arquivo .env"
         )
+
+
+@contextmanager
+def db_connection():
+    """
+    Context manager para gerenciar conexões de forma segura.
+    Garante commit em caso de sucesso e rollback em caso de erro.
+    """
+    conn = None
+    try:
+        conn = get_connection()
+        yield conn
+        conn.commit()
+    except Exception:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if conn:
+            conn.close()
