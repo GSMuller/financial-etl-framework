@@ -160,8 +160,27 @@ For detailed instructions, see [financial-etl-framework/README.md](./financial-e
 
 ## Author
 
-**Giovanni Muller**  
-Data Engineer | ETL Specialist | Database Developer
+**Giovanni Müller**  
+Data Analyst & Engineer | Economics Student | ETL Specialist
+
+I'm a 22-year-old data professional based in Curitiba, Brazil, with a strong foundation in Systems Analysis and Development (PUCPR) and currently completing a Bachelor's degree in Economics at FAE University.
+
+My work sits at the intersection of **Economics, Data Engineering, and Applied Statistics** — leveraging modern ETL frameworks, data warehouse architecture, and quantitative methods to transform raw financial data into strategic business intelligence.
+
+**Current Focus:**
+- Building production-grade ETL pipelines for financial data warehouses
+- Developing automated controllership solutions with PostgreSQL and BigQuery
+- Applying economic reasoning to data engineering problems
+- Implementing medallion architecture for structured data layers
+
+**Technical Expertise:**
+- **Data Engineering**: ETL pipelines, data warehouse design, medallion architecture
+- **Databases**: PostgreSQL (triggers, procedures, optimization), BigQuery
+- **Languages**: Python, SQL, PL/pgSQL
+- **Tools**: Docker, Git, pytest, CI/CD pipelines
+- **Analytics**: Statistical analysis, financial modeling, business intelligence
+
+I'm passionate about projects that merge economic insight with technical precision, helping organizations make evidence-based decisions through robust data infrastructure.
 
 - GitHub: [@GSMuller](https://github.com/GSMuller)
 - LinkedIn: [Giovanni Muller](https://www.linkedin.com/in/giovanni-muller)

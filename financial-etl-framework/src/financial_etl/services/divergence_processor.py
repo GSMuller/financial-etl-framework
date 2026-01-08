@@ -261,6 +261,7 @@ class DivergenceProcessor:
         """
         Detecta registros com status 'PENDENTE VERIFICACAO' que permanecem
         sem resolução por período prolongado.
+        Busca sempre no período fixo: Agosto/2025 até Dezembro/2026.
         """
         try:
             query = """
@@ -272,12 +273,10 @@ class DivergenceProcessor:
                 EXTRACT(DAY FROM NOW() - dta_processamento)::INTEGER as dias_pendente
             FROM byd.bonus_view
             WHERE bonus_utilizado = 'PENDENTE VERIFICACAO'
+                AND dta_processamento BETWEEN '2025-08-01' AND '2026-12-31'
             """
             
             params = []
-            if data_inicio and data_fim:
-                query += " AND dta_processamento BETWEEN %s AND %s"
-                params.extend([data_inicio, data_fim])
             
             self.cursor.execute(query, params)
             rows = self.cursor.fetchall()
@@ -286,9 +285,9 @@ class DivergenceProcessor:
             for row in rows:
                 dias_pendente = row[4]
                 
-                # Confiança aumenta com o tempo pendente
-                # Após 7 dias: 0.6, após 30 dias: 0.9, após 60 dias: 1.0
-                confianca = min(0.5 + (dias_pendente / 100.0), 1.0)
+                # Marca todos como baixa confiança individual (não processar automaticamente)
+                # A criticidade será avaliada no total de pendentes
+                confianca = 0.5
                 
                 divergencias.append(Divergencia(
                     idnfsexterno=row[0],
@@ -305,8 +304,17 @@ class DivergenceProcessor:
                     }
                 ))
             
+            # Determina criticidade baseada no volume total
+            total_pendentes = len(divergencias)
+            if total_pendentes < 10:
+                nivel_criticidade = "BAIXA CRITICIDADE"
+            elif total_pendentes <= 20:
+                nivel_criticidade = "ATENCAO - Volume moderado de pendentes"
+            else:
+                nivel_criticidade = "CRITICO - Ajustar Chassis pendentes de verificacao!"
+            
             logger.info(
-                f"Pendentes Verificacao: {len(divergencias)} detectadas"
+                f"Pendentes Verificacao: {total_pendentes} detectadas - {nivel_criticidade}"
             )
             return divergencias
             
