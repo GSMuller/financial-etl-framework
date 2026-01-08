@@ -3,6 +3,13 @@
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-336791.svg)](https://www.postgresql.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
+[![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-blue)](http://mypy-lang.org/)
+[![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Tests: pytest](https://img.shields.io/badge/tests-pytest-green.svg)](https://pytest.org/)
+[![Coverage: 75%+](https://img.shields.io/badge/coverage-75%25+-success)](https://coverage.readthedocs.io/)
 [![License: Private](https://img.shields.io/badge/License-Private-red.svg)]()
 
 > Robust ETL framework for financial Data Warehouse with PostgreSQL, focused on controllership and operational data analysis.
@@ -213,15 +220,33 @@ python src/financial_etl/rollback.py
 ### Run Tests
 
 ```bash
-# All tests
+# Todos os testes
 pytest
 
-# With coverage report
+# Testes com cobertura e relatório HTML
 pytest --cov=financial_etl --cov-report=html
 
-# Specific test
+# Testes específicos
 pytest tests/test_conn.py -v
+
+# Testes por categoria
+pytest -m unit              # Apenas unitários
+pytest -m integration       # Apenas integração
+pytest -m "not slow"        # Excluir lentos
+
+# Usando script helper (Windows)
+python run_tests.py         # Menu interativo
+run_tests.bat coverage      # Cobertura HTML
+
+# Ferramentas de qualidade
+black src/ tests/           # Formatar código
+isort src/ tests/           # Organizar imports
+flake8 src/                 # Linting
+mypy src/                   # Type checking
+pre-commit run --all-files  # Executar todos os hooks
 ```
+
+**Ver guia completo:** [TESTING_GUIDE.md](TESTING_GUIDE.md)
 
 ---
 

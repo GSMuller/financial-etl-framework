@@ -74,11 +74,18 @@ logs/
 # Testing
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
 .tox/
+.nox/
 coverage.xml
 *.cover
 .hypothesis/
+.cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
 
 # OS
 Thumbs.db

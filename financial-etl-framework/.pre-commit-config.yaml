@@ -1,0 +1,139 @@
+# Pre-commit hooks configuration
+# Instalar: pip install pre-commit
+# Ativar: pre-commit install
+# Executar manualmente: pre-commit run --all-files
+
+repos:
+  # Hooks gerais de qualidade
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Remove espaços em branco no final das linhas
+      - id: end-of-file-fixer
+        name: Garante nova linha no final dos arquivos
+      - id: check-yaml
+        name: Valida sintaxe YAML
+      - id: check-json
+        name: Valida sintaxe JSON
+      - id: check-toml
+        name: Valida sintaxe TOML
+      - id: check-added-large-files
+        name: Previne commit de arquivos grandes
+        args: ['--maxkb=500']
+      - id: check-case-conflict
+        name: Verifica conflitos de case em nomes de arquivo
+      - id: check-merge-conflict
+        name: Verifica marcadores de merge conflict
+      - id: detect-private-key
+        name: Detecta chaves privadas
+      - id: mixed-line-ending
+        name: Padroniza line endings
+
+  # Black - Formatador de código
+  - repo: https://github.com/psf/black
+    rev: 24.1.1
+    hooks:
+      - id: black
+        name: Formata código com Black
+        language_version: python3.9
+        args: ['--line-length=100']
+
+  # isort - Organiza imports
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: Organiza imports com isort
+        args: ['--profile=black', '--line-length=100']
+
+  # Flake8 - Linting
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        name: Verifica código com Flake8
+        args: [
+          '--max-line-length=100',
+          '--extend-ignore=E203,W503',
+          '--max-complexity=10',
+          '--exclude=__pycache__,.git,.venv,venv,build,dist'
+        ]
+
+  # mypy - Type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        name: Verifica tipos com mypy
+        additional_dependencies: [types-all]
+        args: [
+          '--ignore-missing-imports',
+          '--python-version=3.9',
+          '--no-strict-optional',
+          '--warn-redundant-casts',
+          '--warn-unused-ignores'
+        ]
+
+  # Bandit - Verifica vulnerabilidades de segurança
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        name: Verifica segurança com Bandit
+        args: ['-c', 'pyproject.toml']
+        additional_dependencies: ['bandit[toml]']
+
+  # pylint - Linting adicional
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.3
+    hooks:
+      - id: pylint
+        name: Verifica código com Pylint
+        args: [
+          '--max-line-length=100',
+          '--disable=C0111,R0903,C0103',
+          '--good-names=i,j,k,ex,Run,_,id,db'
+        ]
+
+  # Verificações de SQL
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.0.0
+    hooks:
+      - id: sqlfluff-lint
+        name: Lint SQL files
+        args: ['--dialect=postgres']
+        files: \.sql$
+
+  # Verificações de segurança em dependências
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.3
+    hooks:
+      - id: python-safety-dependencies-check
+        name: Verifica vulnerabilidades em dependências
+
+# Configuração global
+default_language_version:
+  python: python3.9
+
+# Arquivos a serem excluídos
+exclude: |
+  (?x)(
+    /__pycache__/|
+    /\.git/|
+    /\.venv/|
+    /venv/|
+    /build/|
+    /dist/|
+    /\.eggs/|
+    /\.pytest_cache/|
+    /htmlcov/|
+    /\.mypy_cache/|
+    /\.tox/|
+    \.pyc$|
+    \.pyo$
+  )
+
+# Configurações adicionais
+fail_fast: false
+minimum_pre_commit_version: '2.20.0'

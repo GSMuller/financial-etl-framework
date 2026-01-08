@@ -5,6 +5,7 @@ Configuração de logging para o projeto.
 import logging
 import os
 from pathlib import Path
+from typing import Optional
 
 log_dir = Path(__file__).parent / 'logs'
 log_dir.mkdir(exist_ok=True)

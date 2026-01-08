@@ -6,9 +6,12 @@ Script para executar rollback de transações no banco de dados PostgreSQL.
 import sys
 from conn import get_connection
 
-def main():
+def main() -> int:
     """
     Executa rollback na conexão ativa do banco de dados.
+    
+    Returns:
+        int: Código de retorno (0 sucesso, 1 erro)
     """
     conn = None
     

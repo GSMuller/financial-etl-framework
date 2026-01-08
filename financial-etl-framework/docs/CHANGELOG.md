@@ -7,11 +7,11 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [1.0.0] - 2026-01-08
 
-### 🎉 Lançamento Inicial
+### Lançamento Inicial
 
 Primeira versão estável do Financial ETL Framework com arquitetura completa de Data Warehouse.
 
-### ✨ Adicionado
+### Adicionado
 
 #### Infraestrutura
 - **Arquitetura em camadas** (Raw → Staging → Mart) seguindo padrão Medalhão
@@ -64,7 +64,7 @@ Primeira versão estável do Financial ETL Framework com arquitetura completa de
 - Healthcheck para containers
 - Non-root user para segurança
 
-### 📦 Estrutura do Projeto
+### Estrutura do Projeto
 
 ```
 financial-etl-framework/
@@ -77,7 +77,7 @@ financial-etl-framework/
 └── pyproject.toml          # Configuração moderna
 ```
 
-### 🔧 Tecnologias
+### Tecnologias
 
 - Python 3.9+
 - PostgreSQL 13+
@@ -88,7 +88,7 @@ financial-etl-framework/
 - Docker para containerização
 - GitHub Actions para CI/CD
 
-### 📊 Métricas
+### Métricas
 
 - **Cobertura de Testes**: ~95%
 - **Linhas de Código**: ~5,000+
@@ -100,7 +100,7 @@ financial-etl-framework/
 
 ## [Unreleased]
 
-### 🚧 Em Desenvolvimento
+### Em Desenvolvimento
 
 - Integração com BigQuery
 - Pipeline automatizado de ETL diário
@@ -109,7 +109,7 @@ financial-etl-framework/
 - Alertas e notificações
 - Documentação de APIs
 
-### 💡 Planejado
+### Planejado
 
 - Suporte a múltiplos ambientes (dev, staging, prod)
 - Versionamento de schemas com Alembic
@@ -122,12 +122,12 @@ financial-etl-framework/
 
 ## Tipos de Mudanças
 
-- **✨ Adicionado** - Para novas funcionalidades
-- **🔧 Modificado** - Para mudanças em funcionalidades existentes
-- **🗑️ Depreciado** - Para funcionalidades que serão removidas
-- **❌ Removido** - Para funcionalidades removidas
-- **🐛 Corrigido** - Para correção de bugs
-- **🔒 Segurança** - Para correções de vulnerabilidades
+- **Adicionado** - Para novas funcionalidades
+- **Modificado** - Para mudanças em funcionalidades existentes
+- **Depreciado** - Para funcionalidades que serão removidas
+- **Removido** - Para funcionalidades removidas
+- **Corrigido** - Para correção de bugs
+- **Segurança** - Para correções de vulnerabilidades
 
 ---
 

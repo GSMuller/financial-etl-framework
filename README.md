@@ -29,7 +29,7 @@ Complete ETL framework for financial Data Warehouse with modern architecture:
 - **Containerized**: Docker support with CI/CD pipelines
 - **BigQuery Integration**: Operational data extraction
 
-[➡️ View detailed documentation](./financial-etl-framework/README.md)
+[View detailed documentation](./financial-etl-framework/README.md)
 
 ---
 

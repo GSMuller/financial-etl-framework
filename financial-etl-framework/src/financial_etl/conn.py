@@ -6,8 +6,10 @@ Utiliza variáveis de ambiente para segurança das credenciais.
 import os
 import psycopg2
 from contextlib import contextmanager
+from typing import Generator, Dict, Any, Optional
 from dotenv import load_dotenv
 from pathlib import Path
+from psycopg2.extensions import connection as Connection
 
 # Carrega variáveis de ambiente do arquivo .env
 # Define o caminho do .env na raiz do projeto (2 níveis acima)
@@ -23,14 +25,14 @@ config = {
     'port': int(os.getenv('DB_PORT', 5432))
 }
 
-def get_connection():
+def get_connection() -> Connection:
     """
     Cria e retorna uma nova conexão com o banco de dados PostgreSQL.
     
     As credenciais são carregadas do arquivo .env na raiz do projeto.
     
     Returns:
-        psycopg2.connection: Objeto de conexão com o banco de dados.
+        Connection: Objeto de conexão com o banco de dados.
     
     Raises:
         psycopg2.Error: Se houver erro na conexão.
@@ -69,10 +71,13 @@ def get_connection():
 
 
 @contextmanager
-def db_connection():
+def db_connection() -> Generator[Connection, None, None]:
     """
     Context manager para gerenciar conexões de forma segura.
     Garante commit em caso de sucesso e rollback em caso de erro.
+    
+    Yields:
+        Connection: Conexão ativa com o banco de dados
     """
     conn = None
     try:
