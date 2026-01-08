@@ -5,45 +5,45 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: Private](https://img.shields.io/badge/License-Private-red.svg)]()
 
-> Framework ETL robusto para Data Warehouse financeiro com PostgreSQL, focado em controladoria e análise de dados operacionais.
+> Robust ETL framework for financial Data Warehouse with PostgreSQL, focused on controllership and operational data analysis.
 
 ---
 
-## 📋 Índice
+## 📋 Table of Contents
 
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Arquitetura](#-arquitetura)
-- [Características](#-características)
-- [Instalação](#-instalação)
-- [Uso](#-uso)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Testes](#-testes)
-- [Contribuindo](#-contribuindo)
-
----
-
-## 🎯 Sobre o Projeto
-
-O **Financial ETL Framework** é uma solução completa para consolidação de dados financeiros e operacionais em um Data Warehouse PostgreSQL. Desenvolvido para suportar processos de controladoria, o framework integra dados de múltiplas fontes (BigQuery, planilhas, sistemas internos) aplicando transformações, validações e regras de negócio.
-
-### Problema Resolvido
-
-Centralizar e padronizar dados financeiros fragmentados em diferentes sistemas, garantindo:
-- ✅ Integridade e rastreabilidade dos dados
-- ✅ Automação de ingestões diárias
-- ✅ Aplicação consistente de regras de negócio
-- ✅ Suporte a relatórios e análises gerenciais
+- [About The Project](#-about-the-project)
+- [Architecture](#-architecture)
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [Testing](#-testing)
+- [Contributing](#-contributing)
 
 ---
 
-## 🏗️ Arquitetura
+## 🎯 About The Project
+
+The **Financial ETL Framework** is a complete solution for consolidating financial and operational data into a PostgreSQL Data Warehouse. Designed to support controllership processes, the framework integrates data from multiple sources (BigQuery, spreadsheets, internal systems) applying transformations, validations, and business rules.
+
+### Problem Solved
+
+Centralize and standardize fragmented financial data across different systems, ensuring:
+- ✅ Data integrity and traceability
+- ✅ Automated daily ingestions
+- ✅ Consistent business rule application
+- ✅ Support for management reports and analysis
+
+---
+
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      FONTES DE DADOS                         │
+│                      DATA SOURCES                            │
 ├─────────────────┬──────────────────┬────────────────────────┤
-│   BigQuery      │  AppSheet/       │   Sistemas             │
-│   (Operacional) │  Google Sheets   │   Internos             │
+│   BigQuery      │  AppSheet/       │   Internal             │
+│  (Operational)  │  Google Sheets   │   Systems              │
 └────────┬────────┴────────┬─────────┴───────────┬────────────┘
          │                 │                     │
          ▼                 ▼                     ▼
@@ -57,74 +57,74 @@ Centralizar e padronizar dados financeiros fragmentados em diferentes sistemas, 
                              ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                   STAGING LAYER (Silver)                     │
-│        Limpeza • Normalização • Padronização                 │
+│        Cleaning • Normalization • Standardization            │
 │  ┌──────────────────────────────────────────────────────┐   │
-│  │  stg_faturamento  │  stg_cadastro  │  stg_bonus     │   │
+│  │  stg_billing   │  stg_registration  │  stg_bonus    │   │
 │  └──────────────────────────────────────────────────────┘   │
 └────────────────────────────┬────────────────────────────────┘
                              │ Business Rules
                              ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                   MART LAYER (Gold)                          │
-│           Views Analíticas • Agregações • KPIs               │
+│         Analytical Views • Aggregations • KPIs               │
 │  ┌──────────────────────────────────────────────────────┐   │
-│  │  mart_controladoria  │  mart_incentivos  │  metrics │   │
+│  │  mart_controlling  │  mart_incentives  │  metrics    │   │
 │  └──────────────────────────────────────────────────────┘   │
 └────────────────────────────┬────────────────────────────────┘
                              │
                              ▼
                     ┌─────────────────┐
                     │  BI Dashboards  │
-                    │    Relatórios   │
+                    │    Reports      │
                     └─────────────────┘
 ```
 
-### Pipeline de Dados
+### Data Pipeline
 
-1. **Extração**: Coleta de dados de BigQuery, planilhas e sistemas
-2. **Carga (Raw)**: Armazenamento bruto sem transformações
-3. **Staging**: Limpeza, validação e normalização
-4. **Transformação**: Aplicação de regras de negócio (triggers, funções)
-5. **Mart**: Camada analítica otimizada para consumo
+1. **Extraction**: Data collection from BigQuery, spreadsheets, and systems
+2. **Loading (Raw)**: Raw storage without transformations
+3. **Staging**: Cleaning, validation, and normalization
+4. **Transformation**: Business rules application (triggers, functions)
+5. **Mart**: Analytical layer optimized for consumption
 
 ---
 
-## ✨ Características
+## ✨ Features
 
 ### Core Features
-- 🔄 **ETL Automatizado**: Pipeline completo de Extract-Transform-Load
-- 🗃️ **Arquitetura em Camadas**: Raw → Staging → Mart (Medalhão)
-- 🔐 **Segurança**: Credenciais via variáveis de ambiente (.env)
-- 📊 **Integração BigQuery**: Ingestão diária de dados operacionais
-- 🧪 **Testes Automatizados**: Cobertura com pytest
-- 📝 **Logging Completo**: Rastreamento de todas as operações
+- 🔄 **Automated ETL**: Complete Extract-Transform-Load pipeline
+- 🗃️ **Layered Architecture**: Raw → Staging → Mart (Medallion)
+- 🔐 **Security**: Credentials via environment variables (.env)
+- 📊 **BigQuery Integration**: Daily operational data ingestion
+- 🧪 **Automated Testing**: Coverage with pytest
+- 📝 **Complete Logging**: Tracking of all operations
 
-### Funcionalidades Específicas
-- 💰 Cálculo automático de bonificações BYD
-- 🔄 Sistema de triggers para propagação de dados
-- 📈 Views materializadas para performance
-- 🎯 Validação de integridade referencial
-- 📅 Controle de versionamento de dados
+### Specific Functionalities
+- 💰 Automatic BYD bonus calculation
+- 🔄 Trigger system for data propagation
+- 📈 Materialized views for performance
+- 🎯 Referential integrity validation
+- 📅 Data versioning control
 
 ---
 
-## 🚀 Instalação
+## 🚀 Installation
 
-### Pré-requisitos
+### Prerequisites
 
-- Python 3.9 ou superior
-- PostgreSQL 13 ou superior
+- Python 3.9 or higher
+- PostgreSQL 13 or higher
 - Git
 
-### Passos
+### Steps
 
-1. **Clone o repositório**
+1. **Clone the repository**
 ```bash
 git clone https://github.com/GSMuller/financial-etl-framework.git
 cd financial-etl-framework
 ```
 
-2. **Crie um ambiente virtual**
+2. **Create a virtual environment**
 ```bash
 python -m venv venv
 # Windows
@@ -133,158 +133,158 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-3. **Instale as dependências**
+3. **Install dependencies**
 ```bash
-# Instalação básica
+# Basic installation
 pip install -e .
 
-# Com ferramentas de desenvolvimento
+# With development tools
 pip install -e ".[dev]"
 
-# Com suporte a notebooks
+# With notebook support
 pip install -e ".[notebooks]"
 
-# Instalação completa
+# Complete installation
 pip install -e ".[dev,notebooks,excel]"
 ```
 
-4. **Configure as variáveis de ambiente**
+4. **Configure environment variables**
 
-Crie um arquivo `.env` na raiz do projeto:
+Create a `.env` file in the project root:
 ```env
 # Database Configuration
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=financial_dw
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
+DB_USER=your_username
+DB_PASSWORD=your_password
 
-# BigQuery (opcional)
+# BigQuery (optional)
 GOOGLE_APPLICATION_CREDENTIALS=path/to/credentials.json
-BQ_PROJECT_ID=seu-projeto
-BQ_DATASET=seu_dataset
+BQ_PROJECT_ID=your-project
+BQ_DATASET=your_dataset
 ```
 
-5. **Execute as migrações do banco de dados**
+5. **Run database migrations**
 ```bash
-# Criar schemas
-psql -h localhost -U seu_usuario -d financial_dw -f schemas/byd/tables/create/create_all.sql
+# Create schemas
+psql -h localhost -U your_user -d financial_dw -f schemas/byd/tables/create/create_all.sql
 
-# Criar triggers
-psql -h localhost -U seu_usuario -d financial_dw -f schemas/byd/triggers/install_triggers.sql
+# Create triggers
+psql -h localhost -U your_user -d financial_dw -f schemas/byd/triggers/install_triggers.sql
 ```
 
 ---
 
-## 💻 Uso
+## 💻 Usage
 
-### Exemplo Básico
+### Basic Example
 
 ```python
 from financial_etl import get_connection, db_connection
 
-# Usando context manager (recomendado)
+# Using context manager (recommended)
 with db_connection() as conn:
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM mart_controladoria.bonus_summary")
+    cursor.execute("SELECT * FROM mart_controlling.bonus_summary")
     results = cursor.fetchall()
     
     for row in results:
         print(row)
 ```
 
-### Executar ETL Completo
+### Run Complete ETL
 
 ```python
 from financial_etl.pipelines import run_daily_etl
 
-# Executa o pipeline completo
+# Execute the complete pipeline
 result = run_daily_etl(date='2026-01-08')
-print(f"Pipeline executado: {result['status']}")
-print(f"Registros processados: {result['records_processed']}")
+print(f"Pipeline executed: {result['status']}")
+print(f"Records processed: {result['records_processed']}")
 ```
 
-### Rollback de Transações
+### Transaction Rollback
 
 ```bash
 python src/financial_etl/rollback.py
 ```
 
-### Executar Testes
+### Run Tests
 
 ```bash
-# Todos os testes
+# All tests
 pytest
 
-# Com relatório de cobertura
+# With coverage report
 pytest --cov=financial_etl --cov-report=html
 
-# Teste específico
+# Specific test
 pytest tests/test_conn.py -v
 ```
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 financial-etl-framework/
 ├── src/
-│   └── financial_etl/          # Código fonte principal
+│   └── financial_etl/          # Main source code
 │       ├── __init__.py
-│       ├── config.py           # Configurações e logging
-│       ├── conn.py             # Gerenciamento de conexões
-│       └── rollback.py         # Utilitário de rollback
-├── tests/                      # Testes automatizados
+│       ├── config.py           # Configuration and logging
+│       ├── conn.py             # Connection management
+│       └── rollback.py         # Rollback utility
+├── tests/                      # Automated tests
 │   ├── __init__.py
 │   ├── test_config.py
 │   ├── test_conn.py
 │   └── test_rollback.py
-├── schemas/                    # Schemas SQL
+├── schemas/                    # SQL schemas
 │   ├── byd/
 │   │   ├── tables/
-│   │   │   ├── create/        # Scripts de criação
-│   │   │   ├── alter/         # Alterações de schema
-│   │   │   ├── insert/        # Scripts de inserção
-│   │   │   └── view&conults/  # Views e consultas
-│   │   └── triggers/          # Triggers e funções PL/pgSQL
+│   │   │   ├── create/        # Creation scripts
+│   │   │   ├── alter/         # Schema alterations
+│   │   │   ├── insert/        # Insertion scripts
+│   │   │   └── view&conults/  # Views and queries
+│   │   └── triggers/          # Triggers and PL/pgSQL functions
 │   └── nd/
-├── Datasets/                   # Dados de exemplo (não versionados)
-├── controlling_postgreSQL/     # Scripts legados
-├── docs/                       # Documentação adicional
+├── Datasets/                   # Sample data (not versioned)
+├── controlling_postgreSQL/     # Legacy scripts
+├── docs/                       # Additional documentation
 ├── .github/
 │   └── workflows/              # CI/CD GitHub Actions
 ├── .gitignore
-├── pyproject.toml              # Configuração do projeto
-├── requirements.txt            # Dependências (legado)
-├── pytest.ini                  # Configuração pytest
-├── Dockerfile                  # Container Docker
-├── .env.example                # Exemplo de variáveis de ambiente
-├── CHANGELOG.md                # Histórico de mudanças
-└── README.md                   # Este arquivo
+├── pyproject.toml              # Project configuration
+├── requirements.txt            # Dependencies (legacy)
+├── pytest.ini                  # Pytest configuration
+├── Dockerfile                  # Docker container
+├── .env.example                # Environment variables template
+├── CHANGELOG.md                # Change history
+└── README.md                   # This file
 ```
 
 ---
 
-## 🧪 Testes
+## 🧪 Testing
 
-O projeto utiliza **pytest** com cobertura de código:
+The project uses **pytest** with code coverage:
 
 ```bash
-# Executar todos os testes
+# Run all tests
 pytest
 
-# Com output verboso
+# With verbose output
 pytest -v
 
-# Gerar relatório de cobertura HTML
+# Generate HTML coverage report
 pytest --cov=financial_etl --cov-report=html
 
-# Abrir relatório no navegador
-# O arquivo estará em htmlcov/index.html
+# Open report in browser
+# File will be at htmlcov/index.html
 ```
 
-### Cobertura Atual
+### Current Coverage
 
 - `config.py`: 95%
 - `conn.py`: 98%
@@ -294,74 +294,74 @@ pytest --cov=financial_etl --cov-report=html
 
 ## 🐳 Docker
 
-### Build da Imagem
+### Build Image
 
 ```bash
 docker build -t financial-etl-framework .
 ```
 
-### Executar Container
+### Run Container
 
 ```bash
 docker run -d \
   --name financial-etl \
   -e DB_HOST=host.docker.internal \
   -e DB_NAME=financial_dw \
-  -e DB_USER=usuario \
-  -e DB_PASSWORD=senha \
+  -e DB_USER=username \
+  -e DB_PASSWORD=password \
   financial-etl-framework
 ```
 
 ---
 
-## 📊 Métricas do Projeto
+## 📊 Project Metrics
 
-- **Linguagem**: Python 58.1%
+- **Language**: Python 58.1%
 - **SQL**: 5.7%
 - **Jupyter Notebooks**: 36.2%
-- **Cobertura de Testes**: ~95%
-- **Linhas de Código**: ~5,000+
+- **Test Coverage**: ~95%
+- **Lines of Code**: ~5,000+
 
 ---
 
-## 🤝 Contribuindo
+## 🤝 Contributing
 
-Contribuições são bem-vindas! Por favor:
+Contributions are welcome! Please:
 
-1. Faça um Fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ### Code Style
 
-O projeto utiliza:
-- **black** para formatação de código
-- **isort** para organização de imports
-- **flake8** para linting
-- **mypy** para type checking
+The project uses:
+- **black** for code formatting
+- **isort** for import organization
+- **flake8** for linting
+- **mypy** for type checking
 
 ```bash
-# Formatar código
+# Format code
 black src/ tests/
 
-# Organizar imports
+# Organize imports
 isort src/ tests/
 
-# Verificar qualidade
+# Quality check
 flake8 src/ tests/
 ```
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Projeto privado - Todos os direitos reservados.
+Private project - All rights reserved.
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
 **Giovanni Muller**
 
@@ -372,16 +372,16 @@ Projeto privado - Todos os direitos reservados.
 
 ## 📝 Changelog
 
-Veja [CHANGELOG.md](CHANGELOG.md) para histórico completo de versões.
+See [CHANGELOG.md](CHANGELOG.md) for complete version history.
 
 ---
 
-## 🙏 Agradecimentos
+## 🙏 Acknowledgments
 
-- Equipe de Controladoria Servopa
-- Comunidade PostgreSQL
-- Contribuidores open-source
+- Servopa Controllership Team
+- PostgreSQL Community
+- Open-source contributors
 
 ---
 
-**⭐ Se este projeto foi útil, considere dar uma estrela!**
+**⭐ If this project was helpful, please consider giving it a star!**
