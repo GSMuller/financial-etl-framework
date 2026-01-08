@@ -9,7 +9,7 @@
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [About The Project](#-about-the-project)
 - [Architecture](#-architecture)
@@ -22,21 +22,21 @@
 
 ---
 
-## 🎯 About The Project
+## About The Project
 
 The **Financial ETL Framework** is a complete solution for consolidating financial and operational data into a PostgreSQL Data Warehouse. Designed to support controllership processes, the framework integrates data from multiple sources (BigQuery, spreadsheets, internal systems) applying transformations, validations, and business rules.
 
 ### Problem Solved
 
 Centralize and standardize fragmented financial data across different systems, ensuring:
-- ✅ Data integrity and traceability
-- ✅ Automated daily ingestions
-- ✅ Consistent business rule application
-- ✅ Support for management reports and analysis
+- Data integrity and traceability
+- Automated daily ingestions
+- Consistent business rule application
+- Support for management reports and analysis
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -89,26 +89,26 @@ Centralize and standardize fragmented financial data across different systems, e
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Features
-- 🔄 **Automated ETL**: Complete Extract-Transform-Load pipeline
-- 🗃️ **Layered Architecture**: Raw → Staging → Mart (Medallion)
-- 🔐 **Security**: Credentials via environment variables (.env)
-- 📊 **BigQuery Integration**: Daily operational data ingestion
-- 🧪 **Automated Testing**: Coverage with pytest
-- 📝 **Complete Logging**: Tracking of all operations
+- **Automated ETL**: Complete Extract-Transform-Load pipeline
+- **Layered Architecture**: Raw → Staging → Mart (Medallion)
+- **Security**: Credentials via environment variables (.env)
+- **BigQuery Integration**: Daily operational data ingestion
+- **Automated Testing**: Coverage with pytest
+- **Complete Logging**: Tracking of all operations
 
 ### Specific Functionalities
-- 💰 Automatic BYD bonus calculation
-- 🔄 Trigger system for data propagation
-- 📈 Materialized views for performance
-- 🎯 Referential integrity validation
-- 📅 Data versioning control
+- Automatic BYD bonus calculation
+- Trigger system for data propagation
+- Materialized views for performance
+- Referential integrity validation
+- Data versioning control
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
@@ -176,7 +176,7 @@ psql -h localhost -U your_user -d financial_dw -f schemas/byd/triggers/install_t
 
 ---
 
-## 💻 Usage
+## Usage
 
 ### Basic Example
 
@@ -225,7 +225,7 @@ pytest tests/test_conn.py -v
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 financial-etl-framework/
@@ -266,7 +266,7 @@ financial-etl-framework/
 
 ---
 
-## 🧪 Testing
+## Testing
 
 The project uses **pytest** with code coverage:
 
@@ -292,7 +292,7 @@ pytest --cov=financial_etl --cov-report=html
 
 ---
 
-## 🐳 Docker
+## Docker
 
 ### Build Image
 
@@ -314,7 +314,7 @@ docker run -d \
 
 ---
 
-## 📊 Project Metrics
+## Project Metrics
 
 - **Language**: Python 58.1%
 - **SQL**: 5.7%
@@ -324,7 +324,7 @@ docker run -d \
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 
@@ -355,13 +355,13 @@ flake8 src/ tests/
 
 ---
 
-## 📄 License
+## License
 
 Private project - All rights reserved.
 
 ---
 
-## 👤 Author
+## Author
 
 **Giovanni Muller**
 
@@ -370,13 +370,13 @@ Private project - All rights reserved.
 
 ---
 
-## 📝 Changelog
+## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for complete version history.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Servopa Controllership Team
 - PostgreSQL Community

@@ -18,22 +18,22 @@ processes and incentive analysis.
 
 ---
 
-## 📂 Projects
+## Projects
 
 ### [Financial ETL Framework](./financial-etl-framework/)
 
 Complete ETL framework for financial Data Warehouse with modern architecture:
-- 🏗️ **Medallion Architecture**: Raw → Staging → Mart layers
-- 🔄 **Automated Pipelines**: Daily data ingestion and transformation
-- 🧪 **Tested & Documented**: 95%+ test coverage with comprehensive docs
-- 🐳 **Containerized**: Docker support with CI/CD pipelines
-- 📊 **BigQuery Integration**: Operational data extraction
+- **Medallion Architecture**: Raw → Staging → Mart layers
+- **Automated Pipelines**: Daily data ingestion and transformation
+- **Tested & Documented**: 95%+ test coverage with comprehensive docs
+- **Containerized**: Docker support with CI/CD pipelines
+- **BigQuery Integration**: Operational data extraction
 
 [➡️ View detailed documentation](./financial-etl-framework/README.md)
 
 ---
 
-## 🎯 Project Objectives
+## Project Objectives
 
 - Centralize operational and administrative data in a single PostgreSQL server
 - Ensure integrity, versioning and traceability in the data flow
@@ -44,7 +44,7 @@ Complete ETL framework for financial Data Warehouse with modern architecture:
 
 ---
 
-## 🏗️ Data Architecture
+## Data Architecture
 
 ```text
 BigQuery (daily billing)
@@ -68,7 +68,7 @@ Dashboards, reports and financial controls
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 .
@@ -85,7 +85,7 @@ Dashboards, reports and financial controls
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Clone the repository**
    ```bash
@@ -112,7 +112,7 @@ For detailed instructions, see [financial-etl-framework/README.md](./financial-e
 
 ---
 
-## 🛠️ Technologies
+## Technologies
 
 - **Database**: PostgreSQL 13+, BigQuery
 - **Language**: Python 3.9+
@@ -123,32 +123,32 @@ For detailed instructions, see [financial-etl-framework/README.md](./financial-e
 
 ---
 
-## 📊 Skills Demonstrated
+## Skills Demonstrated
 
 ### Data Engineering
-- ✅ ETL pipeline design and implementation
-- ✅ Data warehouse architecture (Medallion/Lakehouse)
-- ✅ Data modeling and schema design
-- ✅ SQL optimization and query tuning
-- ✅ Data quality and validation
+- ETL pipeline design and implementation
+- Data warehouse architecture (Medallion/Lakehouse)
+- Data modeling and schema design
+- SQL optimization and query tuning
+- Data quality and validation
 
 ### Software Engineering
-- ✅ Clean code and SOLID principles
-- ✅ Test-driven development (TDD)
-- ✅ CI/CD pipeline automation
-- ✅ Containerization with Docker
-- ✅ Version control with Git
+- Clean code and SOLID principles
+- Test-driven development (TDD)
+- CI/CD pipeline automation
+- Containerization with Docker
+- Version control with Git
 
 ### Database Management
-- ✅ PostgreSQL administration
-- ✅ Trigger and stored procedure development
-- ✅ Performance optimization
-- ✅ Backup and recovery strategies
-- ✅ Database security best practices
+- PostgreSQL administration
+- Trigger and stored procedure development
+- Performance optimization
+- Backup and recovery strategies
+- Database security best practices
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the project
 2. Create a feature branch: `git checkout -b feature/feature-name`
@@ -158,7 +158,7 @@ For detailed instructions, see [financial-etl-framework/README.md](./financial-e
 
 ---
 
-## 👤 Author
+## Author
 
 **Giovanni Muller**  
 Data Engineer | ETL Specialist | Database Developer
@@ -168,7 +168,7 @@ Data Engineer | ETL Specialist | Database Developer
 
 ---
 
-## 📄 License
+## License
 
 This project is private and for internal use.
 
